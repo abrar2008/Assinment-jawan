@@ -1,18 +1,16 @@
-import 'package:assinment/SignIn.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-
-
-class LoginPage extends StatefulWidget {
+class Signin extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _SigninState createState() => _SigninState();
 }
 
-bool isRemeberMe = false;
-class _LoginPageState extends State<LoginPage> {
+class _SigninState extends State<Signin> {
 
-  Widget buildEmail() {
+
+  Widget  buildEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -61,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
     ],
   );
 }
-  Widget buildPassword() {
+Widget buildPassword() {
   return Column(
     
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -112,93 +110,70 @@ class _LoginPageState extends State<LoginPage> {
     ],
   );
 }
-
-Widget buildForgotPassbtn(){
-  return Container(
-    alignment: Alignment.centerRight,
-    child: FlatButton(
-      onPressed: () => print("Forgot Password Pressed"), 
-      padding: EdgeInsets.only(right: 0),
-      child: Text(
-        'Forgot Password',
+Widget buildUserName() {
+  return Column(
+    
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        'UserName',
         style: TextStyle(
           color: Colors.white,
+          fontSize: 16,
           fontWeight: FontWeight.bold
         ),
-      )
-      )
+      ),
+      SizedBox(height: 10,),
+       Container(
+         alignment: Alignment.centerLeft,
+         decoration: BoxDecoration(
+           color: Colors.white,
+           borderRadius: BorderRadius.circular(10),
+           boxShadow: [
+             BoxShadow(
+               color: Colors.black26,
+               blurRadius: 6,
+               offset: Offset(0,2)
+             )
+           ]
+         ),
+         height: 60,
+         child: TextField(
+           
+           obscureText: true,
+             style: TextStyle(
+               color: Colors.black87
+             ),
+             decoration: InputDecoration(
+               border: InputBorder.none,
+               contentPadding: EdgeInsets.only(top: 14),
+               prefixIcon: Icon(
+                 Icons.lock,
+                 color: Color(0xff5ac18e),
+               ),
+               hintText: 'UseName ',
+               hintStyle: TextStyle(
+                 color: Colors.black38
+               )
+             ),
+         ),
+       )
+    ],
   );
 }
-
- Widget buildRememberCb(){
-   return Container(
-     height: 20,
-     child: Row(children: [
-       Theme(
-         data: ThemeData(),
-         child: Checkbox(
-           value:isRemeberMe ,
-           checkColor: Colors.green,
-           activeColor: Colors.white,
-           onChanged: (value) {
-             setState(() {
-               isRemeberMe = value;
-             });
-           }
-         ),
-       ),
-       Text(
-         'Remember me',
-         style: TextStyle(
-           color: Colors.white,
-           fontWeight: FontWeight.bold
-          
-          
-          ),
-       )
-     ],),
-
-   );
- }
-
-Widget buildLoginBtn(){
-return Container(
-    padding: EdgeInsets.symmetric(vertical: 25),
-    width: double.infinity,
-    child: RaisedButton(
-      elevation: 5,
-      onPressed: () => print('Login Pressed'),
-      padding: EdgeInsets.all(15),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15)),
-      color: Colors.white,
-      child: Text(
-        'Login',
-        style: TextStyle(
-          color: Color(0xff5ac18e),
-          fontSize: 18,
-          fontWeight: FontWeight.bold,
-         ),
-      )
-      ),
-      
-      );
-      } 
-
 Widget buildsendSignIn(){
   return Container(
     alignment: Alignment.centerRight,
     child: FlatButton(
     onPressed: () {
-       Navigator.push(context, MaterialPageRoute(builder: (context) => Signin()
-       ),
        
-       );
-    },
-    child:  Text('Sign Up', 
+            Navigator.pop(context);
+          },
+  
+    child:  Text('Sign In', 
     style: TextStyle(
           color: Colors.white,
-          fontWeight: FontWeight.bold 
+          fontWeight: FontWeight.bold
         ),
     
     ),
@@ -244,22 +219,24 @@ Widget buildsendSignIn(){
                     mainAxisAlignment:  MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Sign In',
+                        'Sign Up',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.bold
                         ),
                       ),
                       SizedBox( height: 50,),
+                      buildUserName(),
+                      
+                      SizedBox( height: 20,),
                       buildEmail(),
                       
                       SizedBox( height: 20,),
                       buildPassword(),
-                      buildForgotPassbtn(),
-                      buildRememberCb(),
-                      buildLoginBtn(),
+                      SizedBox( height: 20,),
                       buildsendSignIn(),
+                      
                     ],
                   ),
                 ),
@@ -271,13 +248,5 @@ Widget buildsendSignIn(){
         ),
         ),
         );
-  }
+         }
 }
-
-
-
-
-/*              
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-*/
